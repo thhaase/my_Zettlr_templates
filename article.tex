@@ -1,0 +1,167 @@
+\documentclass[$if(fontsize)$$fontsize$$endif$, a4paper]{article}
+\usepackage[hcentering $if(geometry)$,$geometry$$endif$]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage{graphicx}
+\usepackage[colorlinks=true,urlcolor=blue,linkcolor=black,citecolor=black]{hyperref}
+\usepackage{bookmark}
+\usepackage{comment}
+
+\begin{comment}
+This should be your YAML header:
+
+---
+fontsize: 12pt
+geometry: margin = 2cm, bottom = 3.5cm
+linespace: onehalfspacing #singlespacing, onehalfspacing, doublespacing
+
+title: Titel
+subtitle: Subtitel
+
+author: Thomas
+date: #no date = input systemdate automatically
+
+info: FB03 - Sozialwissenschaften
+infoo: Matrikelnummer - XXXXXXX
+infooo: Seminar
+
+titlepage: false
+toc: false
+---
+\end{comment}
+
+
+
+
+
+
+
+
+% linespacing can be singlespacing, onehalfspacing, doublespacing --------------
+$if(linespace)$
+\usepackage[$linespace$]{setspace}
+$endif$
+
+
+% Für Zitationen aus einer Githubdiskussion kopiert ----------------------------------
+$if(csl-refs)$
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
+ {% don't indent paragraphs
+  \setlength{\parindent}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1 \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces\fi
+  % set entry spacing
+  \ifnum #2 > 0
+  \setlength{\parskip}{#2\baselineskip}
+  \fi
+ }%
+ {}
+\usepackage{calc} % for \widthof, \maxof
+\newcommand{\CSLBlock}[1]{#1\hfill\break}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\maxof{\widthof{#1}}{\csllabelwidth}}{#1}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth}{#1}}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+$endif$
+
+
+
+% Für Tabellen aus pandoc default.tex template ---------------------------------
+$if(tables)$
+\usepackage{longtable,booktabs,array}
+$if(multirow)$
+\usepackage{multirow}
+$endif$
+\usepackage{calc}
+$if(beamer)$
+\usepackage{caption}
+\makeatletter
+\def\fnum@table{\tablename~\thetable}
+\makeatother
+$else$
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+$endif$
+$endif$
+
+
+
+% Für Aufzählungen und Auflistungen aus pandoc-default.tex template ------------
+$if(listings)$
+\usepackage{listings}
+\newcommand{\passthrough}[1]{#1}
+\lstset{defaultdialect=[5.3]Lua}
+\lstset{defaultdialect=[x86masm]Assembler}
+$endif$
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+$if(numbersections)$
+\setcounter{secnumdepth}{$if(secnumdepth)$$secnumdepth$$else$5$endif$}
+$else$
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+$endif$
+
+
+
+
+%-------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------
+\begin{document}
+
+
+
+\begin{titlepage}
+
+$if(title)$\title{$title$\\$if(subtitle)$\textit{$subtitle$}$endif$}$endif$
+
+
+
+$if(author)$\author{\underline{\textbf{$author$}}}$endif$
+
+
+
+  \date{\parbox{\linewidth}{\centering%
+  $if(date)$$date$$else$\today$endif$\endgraf\bigskip
+    $if(info)$$info$$endif$ \hspace*{3cm} $if(infoo)$$infoo$$endif$ \endgraf\medskip\vspace{0,5cm}
+    $if(infooo)$$infooo$$endif$\endgraf
+  }}
+
+
+
+
+$if(titlepage)$
+\maketitle
+$endif$
+\thispagestyle{empty}
+\end{titlepage}
+
+$if(toc)$
+\newpage
+\tableofcontents
+\thispagestyle{empty}
+$endif$
+
+\newpage
+\setcounter{page}{1}
+
+
+
+$body$
+
+
+\newpage
+\bibliography{/home/thomas/Zotero/Meine Bibliothek.bib}
+
+
+
+\end{document}
