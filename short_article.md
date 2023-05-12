@@ -12,7 +12,9 @@ infoo: Matrikelnummer - XXXXXXX
 infooo: Vorlesung - blablabla
 
 toc: true
+textnewpage: false
 ---
+
 
 # Aufgabe
 
