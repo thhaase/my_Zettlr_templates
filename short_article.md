@@ -1,15 +1,17 @@
 ---
 fontsize: 12pt
-linespace: singlespacing #singlespacing, onehalfspacing, doublespacing
+linespace: onehalfspacing #singlespacing, onehalfspacing, doublespacing
+blockquotes: orange #black, cyan, green, orange, violet, blue, darkgray, lightgray, purple, white, brown, gray, magenta, red, yellow
 
-title: Aufgabe 01
 
-author: Thomas Haase
+title: Titel
+
+author: Thomas
 date: #no date = input systemdate automatically
 
 info: FB03 - Sozialwissenschaften
 infoo: Matrikelnummer - XXXXXXX
-infooo: Vorlesung - blablabla
+infooo: Seminar
 
 toc: true
 textnewpage: false

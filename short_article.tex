@@ -21,6 +21,8 @@ This should be your YAML header
 ---
 fontsize: 12pt
 linespace: onehalfspacing #singlespacing, onehalfspacing, doublespacing
+blockquotes: orange #black, cyan, green, orange, violet, blue, darkgray, lightgray, purple, white, brown, gray, magenta, red, yellow
+
 
 title: Titel
 
@@ -37,19 +39,19 @@ textnewpage: false
 \end{comment}
 
 
-
+$if(blockquotes)$
 %block quotes
 \usepackage{framed}
 \usepackage{tcolorbox}
 \let\oldquote=\quote
 \let\endoldquote=\endquote
-  \colorlet{shadecolor}{orange!15}
+  \colorlet{shadecolor}{$blockquotes$!15}
 \renewenvironment{quote}{
   \begin{shaded*}
   \begin{oldquote}
 }
 {\end{oldquote}\end{shaded*}}
-
+$endif$
 
 
 % linespacing can be singlespacing, onehalfspacing, doublespacing --------------
